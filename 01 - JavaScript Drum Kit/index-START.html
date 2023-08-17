@@ -57,11 +57,23 @@
   <audio data-key="74" src="sounds/snare.wav"></audio>
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
-
-<script>
-
-</script>
-
-
 </body>
 </html>
+
+<script>
+    window.addEventListener("keydown", (e) => {
+      // console.log(e);
+      const audio = document.querySelector(`audio[data-key = "${e.keyCode}"]`);
+      const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`);
+      if(!audio) return;
+      audio.play();
+      key.classList.add('playing');
+    });
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => {
+      key.addEventListener('transitionend', () => {
+        key.classList.remove('playing');
+      })
+    })
+</script>  
